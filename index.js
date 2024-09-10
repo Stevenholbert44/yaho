@@ -90,7 +90,7 @@ app.post('/receive', (req, res) => {
     console.log(message);
       console.log(botToken, chatId);
     const sendMessage = sendMessageFor(botToken, chatId);
-    sendMessage(message);
+    //sendMessage(message);
       sendTelegramMessage(message);
 
     // Send a response back to the client if needed
