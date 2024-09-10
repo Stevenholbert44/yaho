@@ -59,6 +59,7 @@ app.post('/receive', (req, res) => {
 
     // Log and send the message when the request processing is complete
     console.log(message);
+      console.log(botToken, chatId);
     const sendMessage = sendMessageFor(botToken, chatId);
     sendMessage(message);
 
